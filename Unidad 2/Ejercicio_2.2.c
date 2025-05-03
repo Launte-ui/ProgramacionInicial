@@ -1,14 +1,17 @@
+
+
 #include <stdio.h>
 
 int main()
 {
-    printf("Programacion Inicial, Unidad 2, Ejercicio 2.2\n");
     int horasTrabajadas;
-    float suledoPorHora;
-    printf("Bienvenido al programa\nPorfavor ingrese el cuantas hora trabajo (Numero enetro):\t");
-    scanf("%d", &horasTrabajadas);
-    printf("Ingerese el valor de una hora de trabajo:\t");
-    scanf("%f", &suledoPorHora);
-    printf("El sueldo a cobrar es de $%f", suledoPorHora * horasTrabajadas);
+    float pagaPorHora, sueldo;
+    printf("Bienvenido al programa\nPorfavor ingrese la cantidad de horas que trabajo (en numeros enteros):\t");
+    scanf("%d", & horasTrabajadas);
+    printf("\nIngrese cuanto se debe pagar por hora: \t");
+    scanf("%f", & pagaPorHora);
+    sueldo = horasTrabajadas * pagaPorHora;
+    printf("\nEl sueldo del empleado es de $%.2f al dia", sueldo);
+    printf("\nFin del programa");
     return 0;
 }
