@@ -4,3 +4,19 @@ no se agrupen en docenas, las adicionales se cobran por unidad. Indicar el preci
 abonar, ingresando la cantidad de empanadas vendidas.*/
 #include <stdio.h>
 
+int main()
+{
+    float precioU, precioD, precioT;
+    int empanadasPedidas, empanadasU, empanadasD;
+    printf("Ingrese el precio de la unidad de empanadas\n");
+    scanf("%f", &precioU);
+    printf("Ingrese el precio de la docena de empanadas\n");
+    scanf("%f", &precioD);
+    printf("Ingrese la cantidad de empanadas a vender\n");
+    scanf("%d", &empanadasPedidas);
+    empanadasU = empanadasPedidas % 12;
+    empanadasD = empanadasPedidas / 12;
+    precioT = precioU * empanadasU + precioD * empanadasD;
+    printf("El precio final de su venta es de %.2f",precioT);
+    return 0;
+}
