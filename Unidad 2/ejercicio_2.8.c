@@ -17,6 +17,7 @@ int main()
     empanadasU = empanadasPedidas % 12;
     empanadasD = empanadasPedidas / 12;
     precioT = precioU * empanadasU + precioD * empanadasD;
-    printf("El precio final de su venta es de %.2f",precioT);
+    printf("El precio final de su venta es de $%.2f",precioT);
+    printf("\nFin del programa");
     return 0;
 }

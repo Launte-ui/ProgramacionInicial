@@ -1,22 +1,24 @@
-//Se ingresan 3 números enteros distintos. Determinar el mayor
+//Se ingresan 3 números enteros distintos. Determinar el mayor.
+
 #include <stdio.h>
 
 int main()
 {
-    float n1, n2, n3;
+    int n1, n2, n3;
 
-    printf("Ejercicio 4.4\nIngrese 3 numeros para identificar el mayor\nIngrese el primer numero:\t");
-    scanf("%f", & n1);
-    printf("\nIngrese el segundo numero:\t");
-    scanf("%f", & n2);
-    printf("\nIngrese el tercer numero:\t");
-    scanf("%f", & n3);
+    printf("Ejercicio 4.1\nIngrese 3 numeros enteros para identificar el mayor\nIngrese el primer numero:\t");
+    scanf("%d", & n1);
+    printf("Ingrese el segundo numero:\t");
+    scanf("%d", & n2);
+    printf("Ingrese el tercer numero:\t");
+    scanf("%d", & n3);
     if(n1 > n2 && n1 > n3)
-        printf("\nEl numero mas grande es %.2f", n1);
+        printf("\nEl numero mas grande es %d", n1);
     else
         if(n2 > n1 && n2 > n3)
-            printf("\nEl numero mas grande es %.2f", n2);
+            printf("\nEl numero mas grande es %d", n2);
         else
-            printf("\nEl numero mas grande es %.2f", n3);
+            printf("\nEl numero mas grande es %d", n3);
+    printf("\nFin del programa");
     return 0;
 }

@@ -32,5 +32,6 @@ int main()
     notaPromedio = sumaAlumnosaAFinal / cont;
     printf("El promedio de las notas de los alumnos que fueron a final es de: %f", notaPromedio);
     printf("\nLa cantidad de alumnos que han aplazado la materia es de %d alumnos", contAplazos);
+    printf("\nFin del programa");
     return 0;
 }
