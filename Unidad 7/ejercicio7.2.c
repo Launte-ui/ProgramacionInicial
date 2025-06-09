@@ -13,17 +13,49 @@ Se solicita determinar:
 
 int main()
 {
-    int numeroAutos[60], tiemposAutos[60], primerLugar, ultimoLugar, promedio, supPromedio, noParticipo, cantAutos;
+    int numeroAutos[60], tiemposAutos[60], primerLugar, ultimoLugar, cantAutos;
+    float promedio = 0;
     CargarVectorEnCero(numeroAutos,60);
     CargarVectorEnCero(tiemposAutos,60);
-    cantAutos = CargarVevtor(numeroAutos, tiemposAutos, 60);
-
+    cantAutos = CargarVector(numeroAutos, tiemposAutos, 60);
+    primerLugar = BuscarMejorTiempo(numeroAutos, tiemposAutos, cantAutos);
+    ultimoLugar = BuscarPeorTiempo(numeroAutos, tiemposAutos, cantAutos);
+    if(cantAutos > 0){
+        for (int i = 0; i < cantAutos; i++)
+        {
+            promedio += tiemposAutos[i];
+        }
+            promedio = promedio/ 10;
+    }
+    printf("\nPromedio %d ",promedio);
+    printf("\nEl auto que quedo en primer lugar fue el de numero %d\nEl auto que logro el peor tiempo es el de numero %d ",primerLugar, ultimoLugar);
+    printf("\nLos autos que superaron el promedio fueron los de numero: ");
     for (int i = 0; i < cantAutos; i++)
-        printf("%d %d %d\n",i,numeroAutos[i],tiemposAutos[i]);
+    {
+        if(tiemposAutos[i] > promedio){
+            printf("%d, ",numeroAutos[i]);
+        }
+    }
+    printf("\nLos autos que no participaron en la carreara son los de numero: ");
+    for (int i = 1; i <= 60; i++)
+    {
+        int flag = 1, j = 0;
+        while (flag && j < cantAutos)
+        {
+            if(numeroAutos[j] == i){
+                flag = 0;
+            }
+            j++;
+        }
+        if(flag){
+            printf("%d, ",i);
+        }
+    }
+    
     return 0;
 }
 
-int CargarVevtor(int vec1[], int vec2[], int ce){
+int CargarVector(int vec1[], int vec2[], int ce){
     int i = 0;
     int numAuto = IngresarAuto();
     while(numAuto > 0 && i < ce){
@@ -68,4 +100,30 @@ int IngresarTiempo(){
         flag = 1;
     } while (entero <= 0);
     return entero;
+}
+
+int BuscarMejorTiempo(int vec1[], int vec2[], int ce){
+    int max = vec2[0];
+    int primerAuto = vec1[0];
+    for (int i = 1; i < ce; i++)
+    {
+        if(vec2[i] < max){
+            max = vec2[i];
+            primerAuto = vec1[i];
+        }
+    }
+    return primerAuto;
+}
+
+int BuscarPeorTiempo(int vec1[], int vec2[], int ce){
+    int max = vec2[0];
+    int primerAuto = vec1[0];
+    for (int i = 1; i < ce; i++)
+    {
+        if(vec2[i] > max){
+            max = vec2[i];
+            primerAuto = vec1[i];
+        }
+    }
+    return primerAuto;
 }
