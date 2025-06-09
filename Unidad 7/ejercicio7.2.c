@@ -26,30 +26,32 @@ int main()
             promedio += tiemposAutos[i];
         }
             promedio = promedio/ 10;
-    }
-    printf("\nPromedio %d ",promedio);
-    printf("\nEl auto que quedo en primer lugar fue el de numero %d\nEl auto que logro el peor tiempo es el de numero %d ",primerLugar, ultimoLugar);
-    printf("\nLos autos que superaron el promedio fueron los de numero: ");
-    for (int i = 0; i < cantAutos; i++)
-    {
-        if(tiemposAutos[i] > promedio){
-            printf("%d, ",numeroAutos[i]);
-        }
-    }
-    printf("\nLos autos que no participaron en la carreara son los de numero: ");
-    for (int i = 1; i <= 60; i++)
-    {
-        int flag = 1, j = 0;
-        while (flag && j < cantAutos)
+        printf("\nEl auto que quedo en primer lugar fue el de numero %d\nEl auto que logro el peor tiempo es el de numero %d ",primerLugar, ultimoLugar);
+        printf("\nLos autos que superaron el promedio fueron los de numero: ");
+        for (int i = 0; i < cantAutos; i++)
         {
-            if(numeroAutos[j] == i){
-                flag = 0;
+            if(tiemposAutos[i] > promedio){
+                printf("%d, ",numeroAutos[i]);
             }
-            j++;
         }
-        if(flag){
-            printf("%d, ",i);
+        printf("\nLos autos que no participaron en la carreara son los de numero: ");
+        for (int i = 1; i <= 60; i++)
+        {
+            int flag = 1, j = 0;
+            while (flag && j < cantAutos)
+            {
+                if(numeroAutos[j] == i){
+                    flag = 0;
+                }
+                j++;
+            }
+            if(flag){
+                printf("%d, ",i);
+            }
         }
+    }
+    else{
+        printf("No participo ningun auto en la carrera.");
     }
     
     return 0;
