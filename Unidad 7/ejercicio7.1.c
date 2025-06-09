@@ -19,6 +19,7 @@ int main()
     int vecA[10], vecB[10], vecC[10], vecD[10];
     float sumaVecA = 0;
     float promedioVecA;
+    int buscarInt;
     CargarVector(vecA,10);
     DuplicarVector(vecA,vecB,10);
     SumaDeVectores(vecA,vecB,vecC,10);
@@ -38,7 +39,8 @@ int main()
     printf("\nLa suma de todos los elementos del vector A es: %.0f", sumaVecA);
     promedioVecA = sumaVecA/10;
     printf("\nEl promedio de valores de los elementos del vector A es: %.1f", promedioVecA);
-
+    buscarInt = IngresarAuto();
+    BuscarEnVector(vecA, 10, buscarInt);
     return 0;
 }
 
@@ -60,4 +62,19 @@ void SumaDeVectores(int vec1[],int vec2[], int vec3[], int ce){
 void InvertirVector(int vec1[], int vec2[], int ce){
     for (int i = 0; i < ce; i++)
         vec2[ce-(i+1)] = vec1[i];
+}
+
+int IngresarAuto(){
+    int entero;
+    printf("\nIngrese un entero para buscar en el vector A: ");
+    scanf("%d",&entero);
+    return entero;
+}
+
+void BuscarEnVector(int vecX[],int ce,int intABuscar){
+    int cantNumerosENcontrados = 0;
+    for (int i = 0; i < ce; i++)
+        if(vecX[i]==intABuscar)
+            cantNumerosENcontrados++;
+    printf("\nEn el vector dado se encontro %d veces el numero %d.",cantNumerosENcontrados,intABuscar);
 }
