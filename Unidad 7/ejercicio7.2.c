@@ -11,6 +11,13 @@ Se solicita determinar:
 
 #include <stdio.h>
 
+int CargarVector(int vec1[], int vec2[], int ce);
+void CargarVectorEnCero(int vecX[], int ce);
+int IngresarDato();
+int IngresarTiempo();
+int BuscarMejorTiempo(int vec1[], int vec2[], int ce);
+int BuscarPeorTiempo(int vec1[], int vec2[], int ce);
+
 int main()
 {
     int numeroAutos[60], tiemposAutos[60], primerLugar, ultimoLugar, cantAutos;
@@ -59,12 +66,12 @@ int main()
 
 int CargarVector(int vec1[], int vec2[], int ce){
     int i = 0;
-    int numAuto = IngresarAuto();
+    int numAuto = IngresarDato();
     while(numAuto > 0 && i < ce){
         vec1[i] = numAuto;
         vec2[i] = IngresarTiempo();
         i++;
-        numAuto = IngresarAuto();
+        numAuto = IngresarDato();
     }
     return i;
 }
@@ -74,7 +81,7 @@ void CargarVectorEnCero(int vecX[], int ce){
         vecX[i] = 0;
 }
 
-int IngresarAuto(){
+int IngresarDato(){
     int entero;
     int flag = 0;
     do
