@@ -13,7 +13,7 @@ Se solicita determinar:
 
 int CargarVector(int vec1[], int vec2[], int ce);
 void CargarVectorEnCero(int vecX[], int ce);
-int IngresarDato();
+int IngresarSueldo();
 int IngresarTiempo();
 int BuscarMejorTiempo(int vec1[], int vec2[], int ce);
 int BuscarPeorTiempo(int vec1[], int vec2[], int ce);
@@ -66,12 +66,12 @@ int main()
 
 int CargarVector(int vec1[], int vec2[], int ce){
     int i = 0;
-    int numAuto = IngresarDato();
+    int numAuto = IngresarSueldo();
     while(numAuto > 0 && i < ce){
         vec1[i] = numAuto;
         vec2[i] = IngresarTiempo();
         i++;
-        numAuto = IngresarDato();
+        numAuto = IngresarSueldo();
     }
     return i;
 }
@@ -81,7 +81,7 @@ void CargarVectorEnCero(int vecX[], int ce){
         vecX[i] = 0;
 }
 
-int IngresarDato(){
+int IngresarSueldo(){
     int entero;
     int flag = 0;
     do
