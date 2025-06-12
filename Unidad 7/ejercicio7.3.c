@@ -12,12 +12,18 @@ int IngrDatoVal(int li, int ls, int cf);
 int BuscarEnVector(int vecX[],int ce,int intABuscar);
 int CargarVector(int vec1[], int vec2[], int ce);
 int IngresarSueldo();
+int BuscarMaximoEnVector(int vec2[], int ce);
+void BuscarYMostrarLegajo(int sueldo[], int legajos[],int ce,int intABuscar);
 
 
 int main()
 {
-    int legajos[50], sueldos[50], cantEmpleados;
+    int legajos[50], sueldos[50], cantEmpleados, maximoSueldo;
     cantEmpleados = CargarVector(legajos,sueldos,50);
+    maximoSueldo = BuscarMaximoEnVector(sueldos,cantEmpleados);
+    printf("El o los empleados de mayor sueldo son los de legajo: ");
+    BuscarYMostrarLegajo(sueldos,legajos,cantEmpleados, maximoSueldo);
+    printf("\n\n\n");
     for (int i = 0; i < cantEmpleados; i++)
         printf("%d %d %d\n",i,legajos[i],sueldos[i]);
     return 0;
@@ -46,6 +52,12 @@ int BuscarEnVector(int vecX[],int ce,int intABuscar){
     return cantNumerosENcontrados;
 }
 
+void BuscarYMostrarLegajo(int sueldo[], int legajos[],int ce,int intABuscar){
+    for (int i = 0; i < ce; i++)
+        if(sueldo[i]==intABuscar)
+            printf("%d",legajos[i]);
+}
+
 int CargarVector(int vec1[], int vec2[], int ce){
     int i = 0;
     int dato = IngrDatoVal(1,50,0);
@@ -54,12 +66,15 @@ int CargarVector(int vec1[], int vec2[], int ce){
         vec1[i] = dato;
         vec2[i] = IngresarSueldo();
         i++;
-        do{
+        while (!flag && i < ce){
             if(flag)
-                printf("\nEl legajo que se ingreso ya a ingresado. Vuelva a ingresar un legajo distinto: ");
+                printf("\nERROR - El legajo que se ingreso ya a sido ingresado. Vuelva a ingresar un legajo distinto. ");
             dato = IngrDatoVal(1,50,0);
             flag = BuscarEnVector( vec1, i, dato);
-        }while (flag);
+        }
+        if(dato==0){
+            printf("%d",i);
+        }
     }
     return i;
 }
@@ -77,4 +92,12 @@ int IngresarSueldo(){
         flag = 1;
     } while (entero <= 0);
     return entero;
+}
+
+int BuscarMaximoEnVector(int vec2[], int ce){
+    int max = vec2[0];
+    for (int i = 1; i < ce; i++)
+        if(vec2[i] > max)
+            max = vec2[i];
+    return max;
 }
