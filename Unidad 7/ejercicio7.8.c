@@ -60,7 +60,7 @@ int CargaEmpleados(int vDNI[],int vSector[],float vSueldos[]){
             {
                 printf("\nERROR - El legajo que se ingreso ya a sido ingresado. Vuelva a ingresar un legajo distinto. ");
                 dato = IngreseIntRangoCF(10000000,99999999,99);
-                }
+            }
         }
     }
     return i;

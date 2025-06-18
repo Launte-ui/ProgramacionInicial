@@ -1,13 +1,19 @@
 #include<stdio.h>
-int main(int argc, char const *argv[])
+char IngreseOpcionVal();
+int main()
 {
-    int xd;
-    printf("hola");
-    xd = 0/2;
-    if( 2==2){
-        printf("y si, 2 es 2");
-    }
-    printf("%d",xd);
-    printf("jaj q loco");
+    char c;
+    c = IngreseOpcionVal();
+    printf("%c",c);
     return 0;
+}
+
+char IngreseOpcionVal(){
+    char op;
+    printf("'I' para Ingreso - 'E' para Egreso");
+    do
+    {
+        scanf("%c",&op);
+    } while (op != 'I' && op != 'E');
+    return op;
 }

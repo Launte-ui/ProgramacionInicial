@@ -23,14 +23,25 @@ de ingreso al stock.*/
 
 #include <stdio.h>
 
+void CargarVectorEnCero(int vecX[], int ce);
 int CargarVectores(int[],int[],int[],int[]);
+int CargarVectores(int vCodigos[],int vDepositos[],int vStock[],int vReposicion[]);
+int IngreseIntMayorA0();
+int IngreseIntRango(int,int);
+int BuscarEnVector(int[],int,int);
+void CargasDeMovimientos( int[], int);
+int BuscarPosEnVector(int[],int,int);
 
 int main()
 {
     int vCodigos[300], vDepositos[300], vStock[300], vReposicion[300];
     int cantElementos;
-    CargarVectorEnCero(vStock);
+    CargarVectorEnCero(vStock,300);
     cantElementos = CargarVectores(vCodigos,vDepositos,vStock,vReposicion);
+    if(cantElementos>0){
+        CargasDeMovimientos(vStock,cantElementos);
+    }
+    MostrarDatosCompletos(vCodigos, vDepositos, vStock, vReposicion,cantElementos);
     return 0;
 }
 
@@ -42,27 +53,31 @@ void CargarVectorEnCero(int vecX[], int ce){
 int CargarVectores(int vCodigos[],int vDepositos[],int vStock[],int vReposicion[]){
     int i=0;
     int dato;
-    dato = IngreseFloatMayorA0();
-    while(dato!=0&&i<300){
-        int flag = -1;
-        vCodigos[i] = dato;
-        vDepositos = IngreseIntRango(1,20);
-        vStock = IngreseIntRango(0,2000);
-        vReposicion = IngreseIntRango(500,1000);
+    printf("Ingrese codigo del articulo: ");
+    dato = IngreseIntMayorA0();
 
-        dato = IngreseFloatMayorA0();
-        while(flag<0 && i<300){
+    while(dato != 0 && i < 300){
+        int flag = 0;
+        vCodigos[i] = dato;
+        printf("Ingrese el deposito del articulo: ");
+        vDepositos[i] = IngreseIntRango(1,20);
+        printf("Ingrese el stock del articulo: ");
+        vStock[i] = IngreseIntRango(0,2000);
+        printf("Ingrese el punto de reposicion del articulo: ");
+        vReposicion[i] = IngreseIntRango(500,1000);
+        i++;
+        printf("Ingrese codigo del articulo: ");
+        while(flag>=0 && i<300){
+            dato = IngreseIntMayorA0();
             flag = BuscarEnVector(vCodigos, i, dato);
-            if (flag>=0){
+            if (flag>=0)
                 printf("ERROR-El codigo ya a sido registrado, ingrese un codigo distinto: ");
-                flag = BuscarEnVector(vCodigos, i, dato);
-            }
         }
     }
     return i;
 }
 
-int IngreseFloatMayorA0()
+int IngreseIntMayorA0()
 {
     int n;
     scanf("%d",&n);
@@ -93,4 +108,50 @@ int BuscarEnVector(int vecX[],int ce,int intABuscar){
         if(vecX[i]==intABuscar)
             cantNumerosENcontrados++;
     return cantNumerosENcontrados;
+}
+
+void MostrarDatosCompletos(int vCodigos[], int vDeposito[], int vStock[], int vReposicion[],int ce){
+    printf("\nCada operario fabrico la siguiente cantidad de muebles:");
+    printf("\nCODIGO DEL OPERARIO:\t\tDEPOSITO DEL ARTICULO:\t\tSTOCK DEL ARTICULO:\t\tPUNTO DE REPOSICION:");
+    for(int i = 0; i < ce;i++){
+        printf("\n%d\t\t\t\t%d\t\t\t\t%d\t\t\t\t%d",vCodigos[i],vDeposito[i],vStock[i],vReposicion[i]);
+    }
+}
+
+void CargasDeMovimientos(int vStock[], int ce){
+    int codigo, pos, cant;
+    char op;
+    codigo = IngreseIntMayorA0();
+    while(codigo!=0){
+        pos = BuscarPosEnVector(vStock,ce,codigo);
+        printf("Ingrese cantidad del articulo: ");
+        cant = IngreseIntMayorA0();
+        op = IngreseOpcionVal();
+        if(op == 'I'){
+            vStock[pos]+=cant;
+        }
+        else{
+            vStock[pos]-=cant;
+        }
+    }
+    int pos = BuscarPosEnVector(vStock,codigo,ce);
+
+}
+
+int BuscarPosEnVector(int vecX[],int ce,int intABuscar){
+    int pos;
+    for (int i = 0; i < ce; i++)
+        if(vecX[i]==intABuscar)
+            pos = i;
+    return pos;
+}
+
+char IngreseOpcionVal(){
+    char op;
+    printf("'I' para Ingreso - 'E' para Egreso");
+    do
+    {
+        scanf("%c",&op);
+    } while (op != 'I' && op != 'E');
+    return op;
 }
