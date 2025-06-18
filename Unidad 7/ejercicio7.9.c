@@ -23,14 +23,15 @@ de ingreso al stock.*/
 
 #include <stdio.h>
 
-void CargarVectorEnCero(int vecX[], int ce);
+void CargarVectorEnCero(int[], int);
 int CargarVectores(int[],int[],int[],int[]);
-int CargarVectores(int vCodigos[],int vDepositos[],int vStock[],int vReposicion[]);
+int CargarVectores(int[],int[],int[],int[]);
 int IngreseIntMayorA0();
 int IngreseIntRango(int,int);
 int BuscarEnVector(int[],int,int);
-void CargasDeMovimientos( int[], int);
+void CargasDeMovimientos(int[], int[], int);
 int BuscarPosEnVector(int[],int,int);
+char IngreseOpcionVal();
 
 int main()
 {
@@ -39,7 +40,7 @@ int main()
     CargarVectorEnCero(vStock,300);
     cantElementos = CargarVectores(vCodigos,vDepositos,vStock,vReposicion);
     if(cantElementos>0){
-        CargasDeMovimientos(vStock,cantElementos);
+        CargasDeMovimientos(vCodigos,vStock,cantElementos);
     }
     MostrarDatosCompletos(vCodigos, vDepositos, vStock, vReposicion,cantElementos);
     return 0;
@@ -118,12 +119,14 @@ void MostrarDatosCompletos(int vCodigos[], int vDeposito[], int vStock[], int vR
     }
 }
 
-void CargasDeMovimientos(int vStock[], int ce){
+void CargasDeMovimientos(int vCodigos[], int vStock[], int ce){
     int codigo, pos, cant;
     char op;
+    printf("Codigo del articulo: ");
     codigo = IngreseIntMayorA0();
     while(codigo!=0){
-        pos = BuscarPosEnVector(vStock,ce,codigo);
+        pos = BuscarPosEnVector(vCodigos,ce,codigo);
+        
         printf("Ingrese cantidad del articulo: ");
         cant = IngreseIntMayorA0();
         op = IngreseOpcionVal();
@@ -133,16 +136,18 @@ void CargasDeMovimientos(int vStock[], int ce){
         else{
             vStock[pos]-=cant;
         }
+        printf("Codigo del articulo: ");
+        codigo = IngreseIntMayorA0();
     }
-    int pos = BuscarPosEnVector(vStock,codigo,ce);
-
 }
 
 int BuscarPosEnVector(int vecX[],int ce,int intABuscar){
-    int pos;
+    int pos = -1;
     for (int i = 0; i < ce; i++)
+    {
         if(vecX[i]==intABuscar)
             pos = i;
+    }
     return pos;
 }
 
