@@ -55,7 +55,6 @@ int CargaEmpleados(int vDNI[],int vSector[],float vSueldos[]){
         printf("Ingrese DNI del empleado: ");
         dato = IngreseIntRangoCF(10000000,99999999,99);
         while (!flag && i < 100){
-            printf("Buscando...\n ");
             flag = BuscarEnVector( vDNI, i, dato);
             if(flag >= 0)
             {

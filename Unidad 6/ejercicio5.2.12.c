@@ -1,4 +1,5 @@
-/*El gobierno de la Ciudad de Buenos Aires realiza una encuesta a los estudiantes de los
+/*
+El gobierno de la Ciudad de Buenos Aires realiza una encuesta a los estudiantes de los
 colegios secundarios. Los primeros datos que ingresar son la fecha (enteros, mes entre 1
 y 12, y año mayor a 2024) y la cantidad de colegios de la ciudad en que se realizó la
 encuesta (entero, mayor a cero).
@@ -22,7 +23,8 @@ d. Porcentaje de estudiantes que respondieron que los conocimientos
 adquiridos eran malos, sobre el total de encuestados.
 e. Mayor edad de los estudiantes encuestados.
 f. Número del colegio con mayor opinión buena sobre los conocimientos
-adquiridos.*/
+adquiridos.
+*/
 
 #include <stdio.h>
 
@@ -30,6 +32,8 @@ int main(){
     int mes = 1, ano = 2025;
     int cantidadColegio=1;
     int colegioMejorOpinon;
+    int respuestas, respuestasMujeresTecnicas;
+    int numColegio = 1;
 
 
     do
@@ -60,7 +64,10 @@ int main(){
 
     for (int i = 0; i < cantidadColegio; i++)
     {
-        int numColegio = 1, cantAlumnos = 1;
+        int  cantAlumnos = 1, dni = 1;
+        int edad;
+        char sexo;
+        char opinion; 
         char espacialidad = 'N';
         do
         {
@@ -74,7 +81,7 @@ int main(){
         do
         {
             if(cantAlumnos <= 0)
-                printf("No puede haber ningun estudiante o estudiantes negativos. Porfavor ingrese un cantidad valida de estudiantes: ");
+                printf("No puede no haber ningun estudiante o estudiantes negativos. Porfavor ingrese un cantidad valida de estudiantes: ");
             else        
                 printf("Cuantos alumnos estan ingresados en el colegio %d?: ", numColegio);
             scanf("%d",&cantAlumnos);
@@ -90,6 +97,17 @@ int main(){
             scanf("%c",&espacialidad);
             printf("%c", espacialidad);
         } while (espacialidad != 'T' && espacialidad != 'D');
+
+        do
+        {
+            printf("Ingrese el DNI de un alumno del colegio numero %d(Ingrese 0 para identificar el fin del ingreso de datos): ", numColegio);
+            scanf("%d",&dni);
+            if (dni != 0)
+            {
+                
+            }
+        } while (dni != 0);
+        
         
     }
     
