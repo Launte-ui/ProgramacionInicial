@@ -2,9 +2,7 @@
 char IngreseOpcionVal();
 int main()
 {
-    char c;
-    c = IngreseOpcionVal();
-    printf("%c",c);
+    int d,m,a;
     return 0;
 }
 
