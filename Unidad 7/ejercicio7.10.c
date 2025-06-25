@@ -26,9 +26,20 @@ int main()
     int vCodigo[30], vDias[30];
     float vPrecio[30], vAlquiler[30];
     int vFecha[3];
+    CargarVectorEnCero(vFecha,0);
+    CargarVectorEnCero(vAlquiler,0);
+    CargarVectorEnCero(vPrecio,0);
+    CargarVectorEnCero(vDias,0);
+    CargarVectorEnCero(vCodigo,0);
     CargarVector(vCodigo, vPrecio, vFecha);
-    CargarAlquileres(vCodigo, vAlquiler, vDias, vPrecio);
+    CargarAlquileres(vCodigo, vPrecio, vDias, vAlquiler);
+    MostrarDatos(vCodigo,vDias,vPrecio,vFecha,vAlquiler);
     return 0;
+}
+
+void CargarVectorEnCero(int vecX[], int ce){
+    for (int i = 0; i < ce; i++)
+        vecX[i] = 0;
 }
 
 void CargarVector(int vCodigos[], float vPrecios[], int vFechas[]){
@@ -51,11 +62,11 @@ void CargarVector(int vCodigos[], float vPrecios[], int vFechas[]){
 
     printf("Ingrese Codigo del auto: ");
     codigo = IngreseEntero();
-    while(i<30){
+    while(i<1){
         vCodigos[i] = codigo;
-        i++;
         printf("Ingrese el precio diario: ");
         vPrecios[i] = IngresePrecio();
+        i++;
         printf("Ingrese Codigo de otro auto: ");
         do{
             codigo = IngreseEntero();
@@ -121,7 +132,7 @@ void CargarAlquileres(int vCodigo[], float vAlquiler[], int vDias[], float vPrec
 int ValidarFecha(int d, int m, int a){
     int val = 0;
     if(a >= 1582){
-        if(m > 0 && m < 12){
+        if(m > 0 && m < 13){
             if(d > 0 && d < DiasDelMes(m,a)){
                 val = 1;
             }
@@ -181,20 +192,23 @@ void MostrarDatos(int vCodigos[], int vDias[], float vPrecio[], int vFechas[], f
     for (int i = 0; i < 30; i++)
     {
         printf("\n%d\t\t\t%d\t\t\t%f\t\t\t",vCodigos[i],vDias[i],vPrecio[i]);
-        CorregirFecha(vDias[i],vFechas[]);
+        CorregirFecha(vDias[i],vFechas);
     }
     
 }
 
 void CorregirFecha(int dias, int vFechas[]){
     int d,m,a;
+    m = vFechas[1];
+    a = vFechas[2];
     d = vFechas[0] + dias;
-    while(d>DiasDelMes(m,a))[
-        d-DiasDelMes(m,a);
+    while(d>DiasDelMes(m,a)){
+        d-=DiasDelMes(m,a);
         m++;
-    ]
+
+    }
     while(m>12){
-        m-12;
+        m-=12;
         a++;
     }
     printf("%d/%d/%d",d,m,a);
