@@ -20,44 +20,47 @@
 void IngresaCodigos(int [], int);
 int Repetido(int [], int, int);
 int NumAleatorio(int, int);
+int BuscarMinYMax(int [], int, int);
 
 
 int main()
 {
     int codigos[MAX_PRODUCTOS];
-    int cantidad[MAX_PRODUCTOS] = {0};
+    int cantidades[MAX_PRODUCTOS] = {0};
     srand(time(NULL));
     IngresaCodigos(codigos, MAX_PRODUCTOS);
     printf("ID \t| Cod\t| Cant\n");
     int codigo, cant;
     do
     {
-        int noEncontrado = 1;
+        int posicionElemento = -1;
         for(int i = 0; i < MAX_PRODUCTOS; i++){
-            printf("%d\t| %d\t| %d\n",i, codigos[i], cantidad[i]);
+            printf("%d\t| %d\t| %d\n",i, codigos[i], cantidades[i]);
         }
         printf("Ingrese el codigo del producto (0 para finalizar): ");
         scanf("%d", &codigo);
         if(codigo != 0){
             for(int i = 0; i < MAX_PRODUCTOS; i++){
                 if(codigos[i] == codigo){
-                    noEncontrado = 0;
+                    posicionElemento = i;
                 }
             }
-            if(noEncontrado){
+            if(posicionElemento == -1){
                 printf("Producto no encontrado.\n");
             }
             else{
-                printf("Ingrese la cantidad de unidades solicitadas: ");
+                printf("Ingrese la cantidades de unidades solicitadas: ");
                 scanf("%d", &cant);
-                for(int i = 0; i < MAX_PRODUCTOS; i++){
-                    if(codigos[i] == codigo){
-                        cantidad[i] += cant;
-                    }
-                }
+                cantidades[posicionElemento] += cant;
             }
         }
     } while (codigo != 0);
+    int minPos = BuscarMinYMax(cantidades, MAX_PRODUCTOS,0);
+    int maxPos = BuscarMinYMax(cantidades, MAX_PRODUCTOS,1);
+    printf("Producto/s con menor cantidad de unidades solicitadas: ");
+    BuscarYMostrarCodigoPorCantidad(cantidades, codigos, MAX_PRODUCTOS, cantidades[minPos]);
+    printf("Producto/s con mayor cantidad de unidades solicitadas: ");
+    BuscarYMostrarCodigoPorCantidad(cantidades, codigos, MAX_PRODUCTOS, cantidades[maxPos]);
     return 0;
 }
 
@@ -66,20 +69,24 @@ void IngresaCodigos(int codigos[], int ce){
     for(int i = 0; i < ce; i++){
         do{
             codigo = NumAleatorio(1000, 10000);
-        } while(Repetido(codigos, ce, codigo));
+        } while(Repetido(codigos, i, codigo) == 0);
         codigos[i] = codigo;
     }
     printf("Codigos ingresados:\n");
 }
 
 int Repetido(int codigos[], int ce, int codigo){
-    int flag = 0;
-    for(int i = 0; i < ce; i++){
-        if(codigos[i] == codigo){
-            flag = 1;
-        }
+    int pos = -1, i = 0;
+    // for(int i = 0; i < ce; i++){
+    //     if(codigos[i] == codigo){
+    //         pos = 1;
+    //     }
+    // }
+    while(pos == -1 && i < ce){
+        if (codigos[i] == codigo) pos = i;
+        else i++;
     }
-    return flag;
+    return pos;
 }
 
 int NumAleatorio( int min,int max){
@@ -87,3 +94,32 @@ int NumAleatorio( int min,int max){
         return num;
 }
 
+
+int BuscarMinYMax(int v[], int ce, int opcion){
+    
+    int referencia = v[0];
+    int pos = 0;
+    for(int i = 1; i < ce; i++){
+        if(opcion == 0){
+            if(v[i] < referencia){
+                referencia = v[i];
+                pos = i;
+            }
+        }
+        else{
+            if(v[i] > referencia){
+                referencia = v[i];
+                pos = i;
+            }
+        }
+    }
+    return pos;
+}
+
+void BuscarYMostrarCodigoPorCantidad(int cant[], int cod[], int ce, int elemento){
+    for(int i = 0; i < ce; i++){
+        if(cant[i] == elemento){
+            printf("%d \n", cod[i]);
+        }
+    }
+}
