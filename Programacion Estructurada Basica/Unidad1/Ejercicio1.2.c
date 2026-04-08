@@ -21,14 +21,17 @@ void IngresaCodigos(int [], int);
 int Repetido(int [], int, int);
 int NumAleatorio(int, int);
 int BuscarMinYMax(int [], int, int);
+void BuscarYMostrarCodigoPorCantidad(int [], int [], int, int);
+void IniciarVectorEnCero(int [], int);
 
 
 int main()
 {
     int codigos[MAX_PRODUCTOS];
-    int cantidades[MAX_PRODUCTOS] = {0};
+    int cantidades[MAX_PRODUCTOS];
     srand(time(NULL));
     IngresaCodigos(codigos, MAX_PRODUCTOS);
+    IniciarVectorEnCero(cantidades, MAX_PRODUCTOS);
     printf("ID \t| Cod\t| Cant\n");
     int codigo, cant;
     do
@@ -121,5 +124,11 @@ void BuscarYMostrarCodigoPorCantidad(int cant[], int cod[], int ce, int elemento
         if(cant[i] == elemento){
             printf("%d \n", cod[i]);
         }
+    }
+}
+
+void IniciarVectorEnCero(int v[], int ce){
+    for(int i = 0; i < ce; i++){
+        v[i] = 0;
     }
 }
