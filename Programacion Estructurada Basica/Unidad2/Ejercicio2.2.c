@@ -8,13 +8,14 @@
 int main(){
     srand(time(NULL));
     int matriz[5][4];
+    int vecColumna[4], vecFila[5];
     CargaAleatoriaMatriz(matriz,5,4);
     MostrarMatriz(matriz,5,4);
 
     printf("\nVector hecho por filas de matriz:\n");
-    CrearVectorPorFilasMatriz(matriz,5,4);
+    CrearVectorPorFilasMatriz(matriz,5,4,vecFila);
     printf("\nVector hecho por columnas de matriz:\n");
-    CrearVectorPorColumnasMatriz(matriz,5,4);
+    CrearVectorPorColumnasMatriz(matriz,5,4,vecColumna);
 
     return 0;
 }
@@ -41,8 +42,7 @@ void MostrarMatriz(int m[][4], int f, int c){
     }
 }
 
-void CrearVectorPorFilasMatriz(int m[][4], int f, int c){
-    int v[f];
+void CrearVectorPorFilasMatriz(int m[][4], int f, int c, int v[]){
     for(int i = 0; i < f; i++){
         int fila = 0;
         for(int j = 0; j < c; j++){
@@ -52,8 +52,7 @@ void CrearVectorPorFilasMatriz(int m[][4], int f, int c){
     }
     MostrarVector(v,f);
 }
-void CrearVectorPorColumnasMatriz(int m[][4], int f, int c){
-    int v[c];
+void CrearVectorPorColumnasMatriz(int m[][4], int f, int c, int v[]){
     for(int i = 0; i < c; i++){
         int col = 0;
         for(int j = 0; j < f; j++){
