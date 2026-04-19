@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define FILAS 5
-#define COLUMNAS 8
+#define FILAS 10
+#define COLUMNAS 40
 
 int NumAleatorio();
 void CargaAleatoriaMatriz(int[][COLUMNAS],int,int);
