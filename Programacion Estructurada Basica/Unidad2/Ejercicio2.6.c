@@ -1,20 +1,8 @@
-// 2.5 
-// Se desea desarrollar un sistema de reservas de entradas para un cine. La sala consta de 12 filas numeradas de
-// la 1 a la 12 y cada fila tiene 9 butacas numeradas a partir de la columna central, con las butacas impares a la
-// derecha y las pares a la izquierda, como en el siguiente esquema:
-// 8 6 4 2 1 3 5 7 9
-// Para la carga, se debe mostrar al usuario un esquema con las butacas disponibles y reservadas, marcando
-// con la letra D las disponibles y con la letra R las reservadas.
-// Por cada reserva se debe solicitar la fila y número de butaca a reservar. Cada vez que se realice una
-// reserva se deberá actualizar el esquema que muestra las butacas. Si la butaca seleccionada ya estaba
-// ocupada se debe informar al usuario para que seleccione otra. El proceso de reserva finaliza con una fila
-// con un número negativo.
-// Al finalizar mostrar:
-// a. la cantidad de asientos disponibles y la cantidad de asientos reservados.
-// b. los números de filas que quedaron vacías.
-// c. la o las filas con mayor cantidad de espectadores.
-// d. un listado con la cantidad de personas que se sentaron en los mismos números de butacas en
-// todo el cine ordenado de mayor a menor. Por ejemplo:
+// 2.6 
+// Se solicita modificar el programa anterior para que además de la butaca y fila ingrese la cantidad de butacas
+// de la reserva. En dicho caso se deberá verificar si existen a partir de la butaca ingresada la cantidad suficiente
+// de butacas disponibles consecutivas (tomar siempre hacia la derecha del seleccionado). Si están disponibles
+// reservar todas las butacas, sino mostrar un mensaje de error.
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -30,6 +18,7 @@ void MostrarVector(int[], int);
 int BusquedaSecuencial(int[], int, int);
 void OrdenarMayorMenosParalelos(int[], int[], int);
 int PosMaximo(int[], int, int);
+
 
 int main(){
     srand(time(NULL));
