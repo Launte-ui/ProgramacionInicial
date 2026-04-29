@@ -1,4 +1,4 @@
-// 3.1
+// 3.2
 // Ingresar dos Strings, uno con el nombre y el otro con el apellido de una persona.
 // Utilizando las funciones de la biblioteca string.h generar un tercer string formado por:
 // NOMBRE, APELLIDO (nombre coma espacio y apellido) y mostrarlo
