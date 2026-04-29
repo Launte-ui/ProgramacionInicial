@@ -62,14 +62,11 @@ int main(){
 }
 
 void LeerTextoLimpio (char texto[], int largo){
-    int i;
+    int i = 0;
     fgets(texto, largo, stdin);
-    i=0;
     while (texto[i]!='\0'){
-        if (texto[i]=='\n')
-        texto[i]='\0';
-        else
-        i++;
+        if (texto[i]=='\n') texto[i]='\0';
+        else i++;
     }
 }
 
@@ -90,10 +87,8 @@ int BusquedaBinariaString(char vStr[][NOMLONG], char strBuscado[], int ce){
         med = (li+ls)/2;
         int cmp = strcmpi(vStr[med], strBuscado);
         if(cmp == 0) pos = med;
-        else if(cmp > 0)
-            ls = med - 1;
-        else
-            li = med + 1;
+        else if(cmp > 0) ls = med - 1;
+        else li = med + 1;
     }
     return pos;
 }
