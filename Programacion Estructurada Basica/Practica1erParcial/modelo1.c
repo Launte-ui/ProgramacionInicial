@@ -1,3 +1,8 @@
+// Aunque el codigo a continuacion resuelve el ejercicio y lo pedido presenta un error al no guardar las zonas recorridas por un chofer.
+// Esto puede resolverse si en vez de dedicar un vector a kms recorridos y otro a zonas se hiciera una matriz de filas = choferes y columnas = n de zonas.
+// La matriz seria acumuladora y guardaria cuantos kms recorrio cada chofer en cada zona.
+// Ademas sobran variables auxiliares pensadas para la carga segura cuando en realidad la unica requerida es la que se usa para el codigo
+
 #include <stdio.h>
 #include <string.h>
 #define CHOF 100
