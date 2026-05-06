@@ -1,0 +1,2 @@
+Para el primer parcial entra y se evaluan los temas vistos en las unidades 1, 2, 3 y 4.
+Vectores, matrices, manejo de textos y estructuras.
