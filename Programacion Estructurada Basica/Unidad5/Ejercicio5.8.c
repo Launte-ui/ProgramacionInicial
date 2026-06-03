@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#define TAM 50
 
 typedef struct
 {
@@ -17,23 +18,25 @@ typedef struct
     int dni;
 }sAlumno;
 
-int LeerEnteroVal(int, int);
-void CargarAlumnos(sAlumno*,int);
+int IngresoEnteroVal(int, int);
+void CargarAlumnos(sAlumno*,int,int*);
+void MostrarAlumnos(sAlumno*,int);
 
 int main(){
-    sAlumno alus[5];
-    sAlumno* pAlus;
+    sAlumno alus[TAM];
+    sAlumno *pAlus;
     pAlus = alus;
+    int cantAlus;
+    int *pCantAlus;
+    pCantAlus = &cantAlus;
     
-    CargarAlumnos(pAlus,5);
+    CargarAlumnos(pAlus,TAM,pCantAlus);
     
-    for (int i = 0; i < 5; i++){
-        printf("DNI: %08d| Nombre: %s\n", alus[i].dni,alus[i].nom);
-    }
+    MostrarAlumnos(pAlus,cantAlus);
     return 0;
 }
 
-int LeerEnteroVal(int li, int ls){
+int IngresoEnteroVal(int li, int ls){
     int num;
     scanf("%d",&num);
     while(num < li || num > ls){
@@ -43,7 +46,7 @@ int LeerEnteroVal(int li, int ls){
     return num;
 }
 
-int* BusquedaSecuencial(sAlumno* v, int ce, int elemento){
+sAlumno* BusquedaSecuencial(sAlumno *v, int ce, int elemento){
     int i = 0;
     sAlumno* dir = NULL;
     while(dir == NULL && i < ce){
@@ -55,11 +58,11 @@ int* BusquedaSecuencial(sAlumno* v, int ce, int elemento){
     return dir;
 }
 
-void CargarAlumnos(sAlumno* dA,int ce){
+void CargarAlumnos(sAlumno *dA,int ce, int *cant){
     int dniAux, i = 0;
-    int* aluPos;
+    sAlumno *aluPos;
     printf("Ingrese DNI del alumno: ");
-    dniAux = LeerEnteroVal(0, 99999999);
+    dniAux = IngresoEnteroVal(0, 99999999);
     while(dniAux != 0 && i < ce){
         aluPos = BusquedaSecuencial(dA, i, dniAux);
         if(aluPos == NULL){
@@ -71,8 +74,14 @@ void CargarAlumnos(sAlumno* dA,int ce){
         else
             printf("Se ingreso un DNI repetido\n");
         if(i<ce){
-        printf("Ingrese DNI del alumno: ");
-        dniAux = LeerEnteroVal(0, 99999999);
+            printf("Ingrese DNI del alumno: ");
+            dniAux = IngresoEnteroVal(0, 99999999);
         }
     }
+    *cant = i;
+}
+
+void MostrarAlumnos(sAlumno* dA,int ce){
+    for(int i = 0; i < ce; i++)
+        printf("DNI: %08d| Nombre: %s\n", (dA+i)->dni,(dA+i)->nom);
 }
