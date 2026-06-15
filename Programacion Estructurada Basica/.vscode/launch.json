@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/Lauta/Desktop/UNLaM/ProgramacionInicial/Programacion Estructurada Basica",
-      "program": "c:/Users/Lauta/Desktop/UNLaM/ProgramacionInicial/Programacion Estructurada Basica/build/Debug/outDebug",
+      "cwd": "c:/Users/Lauta/Desktop/UNLaM/ProgramacionInicial/Programacion Estructurada Basica/Unidad7/Ejercicio4",
+      "program": "c:/Users/Lauta/Desktop/UNLaM/ProgramacionInicial/Programacion Estructurada Basica/Unidad7/Ejercicio4/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

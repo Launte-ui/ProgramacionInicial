@@ -120,7 +120,7 @@ int main(){
 
             fread(&llamadaAux, sizeof(sLlamada),1,fLlamadas);
         }
-        printf("\nCANTIDAD Y TIPO DE LLAMADAS DEL SECTOR %s\nLocal: %d\nLarga Distancia:%d\nCelular: %d\n",secAnterior,locCont,larDisCont,celCont);
+        printf("\nTIPO Y CANTIDAD DE LLAMADAS DEL SECTOR %s\nLocal: %d\nLarga Distancia:%d\nCelular: %d\nTotal de llamdas: %d\n",secAnterior,locCont,larDisCont,celCont, locCont+larDisCont+celCont);
         if(primero || tiempoTotal > tiempoLlamadaMax){
             tiempoLlamadaMax = tiempoTotal;
             primero = 0;
@@ -139,7 +139,7 @@ int main(){
     fclose(fLlamadas);
     fclose(fGastos);
 
-    printf("\nEl sector que hablo mas tiempo es el sector %s\n",maxSector);
+    printf("\nEl sector que hablo mas tiempo es el sector %s, que hablo un total de %d segundos\n",maxSector,tiempoLlamadaMax);
 
 
     printf("\n------------------------------GASTOS-------------------------------------\n");
@@ -180,7 +180,7 @@ void MostrarGastos(){
     }
     fread(&aux, sizeof(sGasto), 1, arch);
     while(!feof(arch)){
-        printf("SECTOR: \t%s|LOCAL: \t%0.2f$|LAR. DIST.: \t%0.2f$|CELULAR: \t%0.2f$\n",aux.sec,aux.cos1,aux.cos2,aux.cos3);
+        printf("SECTOR: %-16s|LOCAL: %-3.2f$|LAR. DIST.: %-3.2f$|CELULAR: %-3.2f$\n",aux.sec,aux.cos1,aux.cos2,aux.cos3);
         fread(&aux, sizeof(sGasto), 1, arch);
     }
     fclose(arch);
@@ -190,15 +190,18 @@ void MostrarGastos(){
 void MostrarLlamadasSector(char *na){
     FILE *arch;
     arch = fopen(na,"rb");
+    int i =1;
     sSector aux;
-    printf("#%s-------------------------------------\n",na);
+    printf("\n#------------------%s-------------------#\n",na);
     if(arch == NULL){
         printf("FATAL ERROR - No se pudo leer %s",na);
         exit(1);
     }
     fread(&aux, sizeof(sSector), 1, arch);
     while(!feof(arch)){
-        printf("TIEMPO EN LLAMADA: %d\nTIPO: %d\nCOSTO DE LA LLAMADA.: %0.2f$\n",aux.dur,aux.tipo,aux.cos);
+        printf("#%d\n",i);
+        printf("\tTIEMPO EN LLAMADA: %d\n\tTIPO: %d\n\tCOSTO DE LA LLAMADA.: %0.2f$\n",aux.dur,aux.tipo,aux.cos);
+        i++;
         fread(&aux, sizeof(sSector), 1, arch);
     }
     fclose(arch);
