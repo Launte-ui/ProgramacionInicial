@@ -23,5 +23,6 @@ int main(){
         printf("%d\n",*(pVec+j)); 
     }
     free(pVec);
+    pVec = NULL;
     return 0;
 }
