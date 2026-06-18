@@ -1,0 +1,8 @@
+programacion estructurada, basica. archivos de texto
+uno,dos tres.cuatro,cinco seis
+Hola mundo,esto.es una prueba
+CADENAS separadas por punto, coma y espacios
+PEB,unidad siete. strtok separadores varios
+perro,gato caballo.vaca,oveja chancho
+Argentina, Buenos Aires. Merlo, San Justo
+fin.del archivo, prueba terminada
