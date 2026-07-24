@@ -19,7 +19,7 @@ int main(){
     {
         char *parte = strtok(str, sep);
         while(parte != NULL){
-            printf(" %s",parte);
+            printf("%s",parte);
             parte = strtok(NULL, sep);
         }
     }
