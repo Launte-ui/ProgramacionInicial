@@ -106,12 +106,9 @@ tVenta ParsearLineaAVenta(char *linea){
     tVenta ventaAux;
     int campo = 0;
     char *parte;
-    // printf("%s",linea);
     parte = strtok(linea, ";");
-    // printf("print de debug\n");
     while(parte != NULL){
         CompletarCampo(&ventaAux,parte,campo);
-        // printf("%s|%d\n",parte,campo);
         parte = strtok(NULL, ";");
         campo++;
     }
