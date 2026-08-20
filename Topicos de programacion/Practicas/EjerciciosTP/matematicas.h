@@ -5,10 +5,9 @@
 
 // Primitivas
 bool factorialSet(double* n, int arg);
-void factorialGet(const double* f);
 
 // No primitivas
 void calcularFactorial(double* n);
-void mostrarFactorial(double* n);
+void mostrarFactorial(const double* n);
 
 #endif // MATEMATICAS_H_INCLUDED
