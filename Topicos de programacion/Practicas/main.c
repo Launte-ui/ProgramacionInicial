@@ -3,7 +3,7 @@
 int main()
 {
     double num;
-    calcularCombinatorio(&num);
-    mostrarCombinatorio(&num);
+    calcularExponencial(&num);
+    mostrarDouble(&num);
     return 0;
 }

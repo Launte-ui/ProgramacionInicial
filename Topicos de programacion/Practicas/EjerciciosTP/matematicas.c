@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include "matematicas.h"
 
+double valorAbsolutoGet(double);
+
 // Primitivas
-bool factorialSet(double* n, int arg)
+bool factorialSet(double* pFactorial, int arg)
 {
     if(arg < 0)
     {
@@ -14,12 +16,12 @@ bool factorialSet(double* n, int arg)
     {
         fact *= i;
     }
-    *n = fact;
+    *pFactorial = fact;
     
     return true;
 }
 
-bool combinatorioSet(double* c, int m, int n)
+bool combinatorioSet(double* pComb, int m, int n)
 {
     if(n < 0)
     {
@@ -36,38 +38,105 @@ bool combinatorioSet(double* c, int m, int n)
     factorialSet(&nFact, n);
     factorialSet(&difFact, m-n);
 
-    *c = mFact/(nFact*difFact);
+    *pComb = mFact/(nFact*difFact);
     return true;
 }
 
+bool potenciaSet(double* pPot, int base, int exp)
+{
+    if(exp == 0)
+    {
+        *pPot = 1;
+        return true;
+    }
+
+    double pot;
+    if(exp > 0)
+    {
+        pot = base;
+        for(int i = 1; i < exp; i++)
+        {
+            pot *= base;
+        }
+    }
+    else
+    {
+        if(base == 0)
+        {
+            return false;
+        }
+        else
+        {
+            pot = 1.0/base;
+            for(int i = -1; i > exp; i--)
+            {
+                pot /= base;
+            }
+        }
+    }
+    *pPot = pot;
+    return true;
+}
+
+bool exponencialSet(double* pExp, int entero, float tol)
+{
+    double exp = 0, fact, pot, term = 1;
+    int i = 1;
+
+    if(tol <= 0)
+    {
+        return false;
+    }
+
+    while(valorAbsolutoGet(term) >= tol)
+    {
+        exp += term;
+        if(!potenciaSet(&pot, entero, i))
+        {
+            return false;
+        }
+        if(!factorialSet(&fact, i))
+        {
+            return false;
+        }
+        i++;
+        term = pot/fact;
+    }
+    *pExp = exp;
+    return true;
+}
+
+double valorAbsolutoGet(double val)
+{
+    if(val < 0)
+    {
+        return -val;
+    }
+
+    return val;
+}
+
 // No primitivas
-void calcularFactorial(double* n)
+void calcularFactorial(double* pFcatorial)
 {
     printf("Ingrese argumento para calcular su factorial: ");
     int arg;
     scanf("%d",&arg);
-    if(!factorialSet(n, arg))
+    while(!factorialSet(pFcatorial, arg))
     {
-        //En caso de error se devuelve -1 como valor inválido.
-        //No existe factorial de un numero que sea negativo.
-        printf("Error - Argumento de factorial negativo.\n");
-        *n = -1;
+        printf("Error - Argumento de factorial invalido.\n");
+        scanf("%d",&arg);
     }
 }
 
-void mostrarFactorial(const double* n)
-{
-    printf("%.0f",*n);
-}
-
-void calcularCombinatorio(double* c)
+void calcularCombinatorio(double* pCombin)
 {
     int m, n;
     printf("Ingrese argumento m: ");
     scanf("%d",&m);
     printf("Ingrese argumento n: ");
     scanf("%d",&n);
-    while(!combinatorioSet(c,m,n))
+    while(!combinatorioSet(pCombin,m,n))
     {
         printf("Error - Se han ingresado valores invalidos.\n");
         printf("Ingrese argumento m: ");
@@ -77,7 +146,40 @@ void calcularCombinatorio(double* c)
     }
 }
 
-void mostrarCombinatorio(const double* c)
+void calcularPotencia(double* pPot)
 {
-    printf("%.0f",*c);
+    int base, exp;
+    printf("Ingrese base de la potencia:");
+    scanf("%d",&base);
+    printf("Ingrese exponente de la potencia:");
+    scanf("%d",&exp);
+    while(!potenciaSet(pPot, base, exp))
+    {
+        printf("Error - potencia con valores invalidos.\nIngrese base de la potencia:");
+        scanf("%d",&base);
+        printf("Ingrese exponente de la potencia:");
+        scanf("%d",&exp);
+    }
+}
+
+void calcularExponencial(double* pExp)
+{
+    int ent;
+    float tol;
+    printf("Ingrese entero de la serie:");
+    scanf("%d",&ent);
+    printf("Ingrese tolerancia de la serie:");
+    scanf("%f",&tol);
+    while(!exponencialSet(pExp, ent, tol))
+    {
+        printf("Ingrese entero de la serie:");
+        scanf("%d",&ent);
+        printf("Ingrese tolerancia de la serie:");
+        scanf("%f",&tol);
+    }
+}
+
+void mostrarDouble(const double* pDouble)
+{
+    printf("%f",*pDouble);
 }
