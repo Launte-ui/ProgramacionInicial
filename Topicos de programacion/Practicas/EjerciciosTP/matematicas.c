@@ -83,6 +83,7 @@ bool exponencialSet(double* pExp, int entero, float tol)
     double exp = 0, fact, pot, term = 1;
     int i = 1;
 
+    //Salida de error por tolerancia negativa
     if(tol <= 0)
     {
         return false;
@@ -91,10 +92,12 @@ bool exponencialSet(double* pExp, int entero, float tol)
     while(valorAbsolutoGet(term) >= tol)
     {
         exp += term;
+        //Salidas de error para exponentes
         if(!potenciaSet(&pot, entero, i))
         {
             return false;
         }
+        //Salidas de error para factoriales
         if(!factorialSet(&fact, i))
         {
             return false;
@@ -114,6 +117,101 @@ double valorAbsolutoGet(double val)
     }
 
     return val;
+}
+
+bool fibonacciValidate(int entero)
+{
+    int anterior = 0, actual = 1, aux;
+    while(actual < entero)
+    {
+        aux = actual;
+        actual += anterior;
+        anterior = aux;
+    }
+
+    if(entero != actual)
+    {
+        return false;
+    }
+    
+    return true;
+}
+
+bool senoTolSet(double* pSeno, int entero, float tol)
+{
+    int signoTerm = 1, termVal = 1;
+    float term=entero;
+    double pot, fact, seno = 0;
+
+    if(tol <= 0)
+    {
+        return false;
+    }
+
+    if(!potenciaSet(&pot, entero, termVal))
+    {
+        return false;
+    }
+    if(!factorialSet(&fact, termVal))
+    {
+        return false;
+    }
+    term = signoTerm * (pot/fact);
+    while(valorAbsolutoGet(term) > tol)
+    {
+        seno += term;
+
+        termVal += 2;
+        signoTerm *= -1;
+
+        if(!potenciaSet(&pot, entero, termVal))
+        {
+            return false;
+        }
+        if(!factorialSet(&fact, termVal))
+        {
+            return false;
+        }
+        term = signoTerm * (pot/fact);
+    }
+
+    *pSeno = seno;
+    return true;
+}
+
+int numeroNaturalPerfectoClasificate(int entero)
+{
+    int denom = 1, divSuma = 0;
+
+    if(entero <= 0)
+    {
+        return 0;
+    }
+
+    while(denom < entero)
+    {
+        if(entero%denom == 0)
+        {
+            divSuma += denom;
+        }
+        denom++;
+    }
+
+    if(divSuma == entero)
+    {
+        return 1;
+    }
+    else
+    {
+        if(divSuma < entero)
+        {
+            return 2;
+        }
+        else
+        {
+            return 3;
+        }
+    }
 }
 
 // No primitivas
@@ -162,7 +260,7 @@ void calcularPotencia(double* pPot)
     }
 }
 
-void calcularExponencial(double* pExp)
+void aproximarExponencial(double* pExp)
 {
     int ent;
     float tol;
@@ -179,7 +277,56 @@ void calcularExponencial(double* pExp)
     }
 }
 
+void validarFibonacci()
+{
+    int entero;
+    printf("Ingrese un numero entero para verificar que forme parte de la sucesion de Fibonacci: ");
+    scanf("%d",&entero);
+    if(fibonacciValidate(entero))
+    {
+        printf("%d forma parte dela sucesion de Fibonacci.",entero);
+    }
+    else
+    {
+        printf("%d NO forma parte dela sucesion de Fibonacci.",entero);
+    }
+}
+
 void mostrarDouble(const double* pDouble)
 {
     printf("%f",*pDouble);
+}
+
+void aproximarSeno(double* pSeno)
+{
+    int ent;
+    float tol;
+    printf("Ingrese entero del seno:");
+    scanf("%d",&ent);
+    printf("Ingrese tolerancia de la aproximacion:");
+    scanf("%f",&tol);
+    while(!senoTolSet(pSeno, ent, tol))
+    {
+        printf("Error inesperado - Revise los valores ingresados.\n");
+        printf("Ingrese entero del seno:");
+        scanf("%d",&ent);
+        printf("Ingrese tolerancia de la aproximacion:");
+        scanf("%f",&tol);
+    }
+
+}
+
+void clasificarPerfeccionNatural(int ent)
+{
+    int resp;
+    char clas[4][15] = {"","Perfecto", "Deficiente", "Abundante"};
+    resp = numeroNaturalPerfectoClasificate(ent);
+    while(!resp)
+    {
+        printf("Error - Se a ingresado un numero no natural.\n");
+        resp = numeroNaturalPerfectoClasificate(ent);
+    }
+
+
+    printf("El numero es %s",clas[resp]);
 }

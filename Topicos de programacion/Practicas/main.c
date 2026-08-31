@@ -3,7 +3,7 @@
 int main()
 {
     double num;
-    calcularExponencial(&num);
+    calcularFactorial(&num);
     mostrarDouble(&num);
     return 0;
 }
