@@ -214,6 +214,35 @@ int numeroNaturalPerfectoClasificate(int entero)
     }
 }
 
+int primoValidate(int num)
+{
+    if(num <= 0)
+    {
+        return 0;
+    }
+
+    int cantDivisores = 0;
+    int denom = 1;
+
+    while(denom <= num && cantDivisores <= 2)
+    {
+        if(num%denom == 0)
+        {
+            cantDivisores++;
+        }
+        denom++;
+    }
+
+    if(cantDivisores == 2)
+    {
+        return 1;
+    }
+    else
+    {
+        return 2;
+    }
+}
+
 // No primitivas
 void calcularFactorial(double* pFcatorial)
 {
@@ -316,17 +345,38 @@ void aproximarSeno(double* pSeno)
 
 }
 
-void clasificarPerfeccionNatural(int ent)
+void clasificarPerfeccionNatural()
 {
-    int resp;
+    int resp, ent;
     char clas[4][15] = {"","Perfecto", "Deficiente", "Abundante"};
+    printf("Ingrese numero natural para clasificar: ");
+    scanf("%d",&ent);
     resp = numeroNaturalPerfectoClasificate(ent);
     while(!resp)
     {
         printf("Error - Se a ingresado un numero no natural.\n");
+        printf("Ingrese numero natural para clasificar: ");
+        scanf("%d",&ent);
         resp = numeroNaturalPerfectoClasificate(ent);
     }
 
+    printf("El numero es %s",clas[resp]);
+}
+
+void validarPrimo()
+{
+    int resp, ent;
+    char clas[3][9] = {"","Primo", "No primo"};
+    printf("Ingrese numero natural para verificar si es primo: ");
+    scanf("%d",&ent);
+    resp = primoValidate(ent);
+    while(!resp)
+    {
+        printf("Error - Se a ingresado un numero no natural.\n");
+        printf("Ingrese numero natural para verificar si es primo: ");
+        scanf("%d",&ent);
+        resp = primoValidate(ent);
+    }
 
     printf("El numero es %s",clas[resp]);
 }

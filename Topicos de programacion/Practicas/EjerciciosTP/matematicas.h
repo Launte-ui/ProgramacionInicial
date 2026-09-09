@@ -11,6 +11,7 @@ bool exponencialSet(double* pExp, int entero, float tol);
 bool fibonacciValidate(int entero);
 bool senoTolSet(double* pSeno, int entero, float tol);
 int numeroNaturalPerfectoClasificate(int num);
+int primoValidate(int num);
 
 // No primitivas
 void calcularFactorial(double* pFcatorial);
@@ -20,6 +21,7 @@ void aproximarExponencial(double* pExp);
 void validarFibonacci();
 void mostrarDouble(const double* pDouble);
 void aproximarSeno(double* pSeno);
-void clasificarPerfeccionNatural(int ent);
+void clasificarPerfeccionNatural();
+void validarPrimo();
 
 #endif // MATEMATICAS_H_INCLUDED

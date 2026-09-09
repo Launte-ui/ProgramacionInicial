@@ -1,0 +1,1 @@
+-Wall -Wextra -g3 <Todas las rutas de archivos .c> -o <Ruta de main.exe>

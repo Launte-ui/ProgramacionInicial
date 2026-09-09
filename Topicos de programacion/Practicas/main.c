@@ -2,8 +2,6 @@
 
 int main()
 {
-    double num;
-    calcularFactorial(&num);
-    mostrarDouble(&num);
+    validarPrimo();
     return 0;
 }
